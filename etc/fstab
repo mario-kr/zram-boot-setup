@@ -1,7 +1,7 @@
-/dev/zram0	/         	ext4      	rw,relatime	0 1
+/dev/zram0	                /         	ext4    rw,relatime	0 1
 
 # persistent root filesystem
-/dev/disk/by-label/RAM_ARCH	/disk_root	ext4	ro,noauto 0 2
+/dev/disk/by-label/RAM_ARCH	/disk_root	ext4    ro,noauto 0 2
 
 # /boot
-UUID=58E2-15CA      	/boot     	vfat      	ro,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+/dev/disk/by-label/BOOT     /boot     	vfat    ro,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
