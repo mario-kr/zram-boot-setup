@@ -1,0 +1,18 @@
+#!/bin/bash
+
+build() {
+
+	add_module zram
+	add_binary mkdir
+	add_binary mkfs.ext4
+	add_binary cp
+	add_runscript
+
+}
+
+help() {
+	cat <<HELPEOF
+this is a custom hook to copy a small arch installation from disk to a zram
+blockdevice and boot from it.
+HELPEOF
+}
