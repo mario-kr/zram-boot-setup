@@ -1,0 +1,18 @@
+#!/bin/bash
+
+run_hook() {
+
+	modprobe zram num_devices=1 || return 1
+	echo 16G > /sys/block/zram0/disksize || return 1
+	mkfs.ext4 /dev/zram0 || return 1
+	mkdir /ram_arch_ram || return 1
+	mkdir /ram_arch_disk || return 1
+	mount /dev/zram0 /ram_arch_ram || return 1
+	mount /dev/disk/by-label/RAM_ARCH /ram_arch_disk || return 1
+	echo "begin copy"
+	cp -a /ram_arch_disk/* /ram_arch_disk/.[a-zA-Z0-9]* /ram_arch_ram || return 1
+	echo "end copy"
+	umount /ram_arch_disk || return 1
+	umount /ram_arch_ram || return 1
+
+}
