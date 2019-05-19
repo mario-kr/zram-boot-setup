@@ -1,0 +1,27 @@
+#!/bin/bash
+
+$* || {
+	rc=$?
+	echo "$* didn't run, skip running on persistent root..."
+	exit $rc
+}
+
+mount | grep disk_root | grep -q rw || {
+	umount /disk_root >/dev/null 2>&1
+	umount /dev/disk/by-label/RAM_ARCH >/dev/null 2>&1
+       	mount -o rw /disk_root || {
+		echo "unable to mount persistent root, aborting"
+		exit 1
+	}
+}
+
+
+umount /boot >/dev/null 2>&1
+
+mount -o rw /dev/disk/by-label/BOOT /disk_root/boot
+
+arch-chroot /disk_root "$@"
+
+sync
+
+umount -r /disk_root
