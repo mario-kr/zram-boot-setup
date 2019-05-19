@@ -1,0 +1,10 @@
+# mkinitcpio preset file for linux-ck-zen kernel + zram setup
+
+ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="/boot/vmlinuz-linux-ck-zen"
+
+PRESETS=('default')
+
+#default_config="/etc/mkinitcpio.conf"
+default_image="/boot/initramfs-linux-ck-zen-ram.img"
+#default_options=""
